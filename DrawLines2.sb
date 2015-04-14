@@ -1,0 +1,81 @@
+InitializeProgram()
+
+'This is the main subroutine.
+Sub InitializePRogram
+  'Creates the frame.
+  GraphicsWindow.Show()
+  GraphicsWindow.Title = "Small Basic Paint"
+  GraphicsWindow.Width = 1000
+  GraphicsWindow.Height = 800
+  'Declares subroutines.
+  Controls.ButtonClicked = SelectColorSub
+  GraphicsWindow.MouseDown = MouseDownSub
+  GraphicsWindow.MouseMove = MouseMoveSub
+  'Adds buttons
+  'colors
+  RedButton = Controls.AddButton("red", 0,0)
+  OrangeButton = Controls.AddButton("orange", 100, 0)
+  YellowButton = Controls.AddButton("yellow", 200, 0)
+  GreenButton = Controls.AddButton("green", 300, 0)
+  BlueButton = Controls.AddButton("blue", 400, 0)
+  IndigoButton = Controls.AddButton("indigo", 500, 0)
+  VioletButton = Controls.AddButton("violet", 600, 0)
+  'shades'
+  BlackButton = Controls.AddButton("black", 700, 0)
+  WhiteButton = Controls.AddButton("white", 800, 0)
+  'Creates the buttons for the pen thickness controls.
+  ThinPenButton = Controls.AddButton("thin", 0, 30)
+  RegularThicknessPenButton = Controls.AddButton("regular", 100, 30)
+  ThickPenButton = Controls.AddButton("thick", 200, 30)
+EndSub
+
+'Configures the "pen" of the app.
+Sub MouseDownSub
+  X = GraphicsWindow.MouseX
+  Y = GraphicsWindow.MouseY
+   If (Controls.LastClickedButton = ThinPenButton) Then
+  GraphicsWindow.PenWidth = 3
+ ElseIf (Controls.LastClickedButton = RegularThicknessPenButton) Then
+  GraphicsWindow.PenWidth = 6
+ ElseIf (Controls.LastClickedButton = ThickPenButton) Then
+   GraphicsWindow.PenWidth = 9
+ EndIf
+EndSub
+
+'Draws the lines.
+Sub MouseMoveSub
+  If (Mouse.IsLeftButtonDown) Then 
+    XNew = GraphicsWindow.MouseX
+    YNew = GraphicsWindow.MouseY
+    GraphicsWindow.DrawLine(X, Y, XNew, YNew)
+    X = XNew
+    Y = YNew
+  EndIf
+EndSub
+
+'Selects the color.'
+Sub SelectColorSub
+  'colors
+  If (Controls.LastClickedButton = RedButton ) Then
+    GraphicsWindow.PenColor = "Red"
+  ElseIf (Controls.LastClickedButton = OrangeButton) Then
+    GraphicsWindow.PenColor = "Orange"
+  ElseIf (Controls.LastClickedButton = YellowButton) Then
+    GraphicsWindow.PenColor = "Yellow"
+  ElseIf (Controls.LastClickedButton = GreenButton) Then
+    GraphicsWindow.PenColor = "Green"
+  ElseIf (Controls.LastClickedButton = BlueButton) Then
+    GraphicsWindow.PenColor = "Blue"
+  ElseIf (Controls.LastClickedButton = IndigoButton) Then
+    GraphicsWindow.PenColor = "Indigo"
+  ElseIf (Controls.LastClickedButton = VioletButton) Then
+    GraphicsWindow.PenColor = "Violet"
+  'shades
+  ElseIf (Controls.LastClickedButton = BlackButton) Then
+    GraphicsWindow.PenColor = "Black"
+  ElseIf (Controls.LastClickedButton = WhiteButton) Then
+    GraphicsWindow.PenColor = "White"
+  EndIf
+EndSub
+
+  
